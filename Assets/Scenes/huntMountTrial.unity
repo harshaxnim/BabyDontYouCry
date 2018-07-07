@@ -199,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &920448429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129f4825eeed84ea8b9699266faeeae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hunteeCount: 5
+  hunteeCount: 1
   huntees: []
 --- !u!4 &920448430
 Transform:
@@ -752,7 +752,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.002
+      scalar: 0.003
       minScalar: 1
       maxCurve:
         serializedVersion: 2
