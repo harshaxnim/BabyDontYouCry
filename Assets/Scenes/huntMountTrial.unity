@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129f4825eeed84ea8b9699266faeeae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hunteeCount: 1
+  hunteeCount: 2
   huntees: []
 --- !u!4 &920448430
 Transform:
@@ -600,7 +600,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1781738932
+  randomSeed: 259707936
   InitialModule:
     serializedVersion: 3
     enabled: 1

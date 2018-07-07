@@ -15,7 +15,7 @@ public class hunteeSpawner : MonoBehaviour {
 	float terrainSize;
 	float terrainCenter;
 
-	string[] hunteeFabNames = {"Eyes"}; // TODO
+	string[] hunteeFabNames = {"animal1"}; // TODO
 
 
 	public UnityEngine.Object[] huntees;
@@ -58,7 +58,7 @@ public class hunteeSpawner : MonoBehaviour {
 	void gatherHuntees(){
 		for (int i = 0; i < hunteeFabNames.Length; i++) {
 			Debug.Log ("gathering");
-			huntees[i] = Resources.Load ("huntees/"+hunteeFabNames[i]);
+			huntees[i] = Resources.Load ("huntees/"+hunteeFabNames[i]+"/fab");
 		}
 	}
 
