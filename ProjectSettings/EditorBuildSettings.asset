@@ -8,3 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/huntMountTrial.unity
     guid: 57b8701b511864940b9ed22a96bc4c7e
+  - enabled: 0
+    path: Assets/Scenes/gyroSimple.unity
+    guid: d06d129b828574b78886a42571274591
