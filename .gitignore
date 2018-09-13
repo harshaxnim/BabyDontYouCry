@@ -29,7 +29,7 @@ Icon?
 /*.sln
 [Ee]xported[Oo]bj/
 obj/
-
+.vs
 
 
 # Unity generated
