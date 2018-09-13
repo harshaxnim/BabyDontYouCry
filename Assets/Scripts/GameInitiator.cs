@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+static class MyGameState
+{
+    public static bool in_game = false;
+}
+
 public class GameInitiator : MonoBehaviour {
 
 	public GameObject sun;
@@ -12,8 +17,8 @@ public class GameInitiator : MonoBehaviour {
 		sun = GameObject.Find ("Sun");
 		sun.SetActive (false);
 
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
+		//Cursor.visible = false;
+		//Cursor.lockState = CursorLockMode.Locked;
 
 	}
 	

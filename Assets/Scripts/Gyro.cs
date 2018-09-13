@@ -5,15 +5,15 @@ using UnityEngine;
 public class Gyro : MonoBehaviour {
 
 	private Quaternion origin = Quaternion.identity;
-	private Vector3 rotateValue;
 
 	void Start() {
 		Input.gyro.enabled=true;
+        resetCam();
 	}
 
 	void Update() {
-		if (Input.touchCount > 0) // temporary: will be removed
-			resetCam ();
+		//if (Input.touchCount > 0) // temporary: will be removed
+			//resetCam ();
 		transform.localRotation = Quaternion.Inverse(origin) * GyroToUnity(Input.gyro.attitude);
 	}
 

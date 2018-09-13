@@ -43,7 +43,7 @@ public class treeSpawner : MonoBehaviour {
 			float dis = Random.Range (xStart, xRange);
 			float ang = Random.Range (0, angRange);
 			int tId = Random.Range (0, trees.Length);
-			Debug.Log ("tid: "+tId);
+			Debug.Log ("grew tree with tid: "+tId);
 
 			PolarToCartesian randLoc = new PolarToCartesian (dis, ang);
 
