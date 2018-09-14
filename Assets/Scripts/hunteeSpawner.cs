@@ -20,8 +20,12 @@ public class hunteeSpawner : MonoBehaviour {
 
 	public UnityEngine.Object[] huntees;
 
+    private List<GameObject> hunteeInstances = new List<GameObject>();
+    private bool firstStart = true;
+
 	// Use this for initialization
 	void Start () {
+        firstStart = false;
 		huntsGround = GameObject.Find ("HuntsGround").GetComponent(typeof(Terrain)) as Terrain;
 
 		terrainSize = huntsGround.terrainData.size.x; // Assuming that the terrrain is a square
@@ -29,11 +33,11 @@ public class hunteeSpawner : MonoBehaviour {
 		xRange = terrainSize / 2;
 		terrainCenter = terrainSize / 2;
 
-		// Load the trees
+		// Load the animals
 		huntees = new UnityEngine.Object[hunteeFabNames.Length];
 		gatherHuntees();
 
-		// Grow trees
+		// Grow animals
 		placeHuntees (xStart, xRange, angRange);
 	}
 
@@ -51,6 +55,8 @@ public class hunteeSpawner : MonoBehaviour {
 			GameObject hunteeInstance = (GameObject) Instantiate (huntees[hId], new Vector3 (randLoc.x + terrainCenter, 2.5f, randLoc.y + terrainCenter), Quaternion.identity);
 			hunteeInstance.name = hunteeFabNames[hId] + i;
 			hunteeInstance.gameObject.transform.LookAt (new Vector3 (150, 0, 150));
+
+            hunteeInstances.Add(hunteeInstance);
 		}
 
 	}
@@ -66,5 +72,17 @@ public class hunteeSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	private void OnDisable()
+	{
+        foreach (GameObject huntee in hunteeInstances) {
+            Destroy(huntee);
+        }
+	}
+
+	private void OnEnable()
+	{
+        if (!firstStart) Start();
 	}
 }

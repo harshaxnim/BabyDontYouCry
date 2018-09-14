@@ -11,7 +11,6 @@ public class InGameScript : StateMachineBehaviour {
         // intimate that we're now in the game.
         // so that the gyro scripts are started.
         MyGameState.in_game = true;
-        Debug.Log("enabling in_game attr");
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

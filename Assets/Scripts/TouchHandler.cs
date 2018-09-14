@@ -8,7 +8,10 @@ public class TouchHandler : MonoBehaviour {
 
     public Button m_mainStartButton;
     public Button m_pauseButton;
+    public Button m_camerResetButton;
+
     public Camera m_characterCamera;
+
     public GameObject m_character;
     public GameObject m_animalSpawner;
 
@@ -18,7 +21,7 @@ public class TouchHandler : MonoBehaviour {
     public Animator cameraAnimator;
     public Animator starsAnimator;
 
-    //private bool inGame;
+    public StateMachineBehaviour m_stateMenu;
 
 
     public float slowDownOnPause = 0.1f;
@@ -31,10 +34,18 @@ public class TouchHandler : MonoBehaviour {
 
         m_mainStartButton = m_mainStartButton.GetComponent<Button>();
         m_pauseButton = m_pauseButton.GetComponent<Button>();
+        m_camerResetButton = m_camerResetButton.GetComponent<Button>();
+
 
         m_mainStartButton.onClick.AddListener(onMainStartButtonClicked);
-        m_pauseButton.onClick.AddListener(onPauseButtonClicked);
+        m_camerResetButton.onClick.AddListener(onCameraResetButtonClicked);
 
+        //m_stateMenu = cameraAnimator;
+
+    }
+
+    void onCameraResetButtonClicked(){
+        
     }
     
     void onMainStartButtonClicked(){
@@ -57,28 +68,59 @@ public class TouchHandler : MonoBehaviour {
         //inGame = true;
     }
 
-    void onPauseButtonClicked(){
+    public void onPauseButtonClicked(){
 
-        var allAudioSources = FindObjectsOfType<AudioSource>();
+        if (MyGameState.in_game) {
 
-        paused = !paused;
+            var allAudioSources = FindObjectsOfType<AudioSource>();
 
-        if (paused)
-        {
-            Time.timeScale *= slowDownOnPause;
-            for (int i = 0; i < allAudioSources.Length; i++)
+            paused = !paused;
+
+            if (paused)
             {
-                allAudioSources[i].pitch *= slowDownOnPause;
+                // slow animations
+                Time.timeScale *= slowDownOnPause;
+                // slow audio
+                for (int i = 0; i < allAudioSources.Length; i++)
+                {
+                    allAudioSources[i].pitch *= slowDownOnPause;
+                }
+                // pause input
+                m_character.GetComponent<Gyro>().enabled = false;
+
+            }
+            else
+            {
+                Time.timeScale = 1;
+                for (int i = 0; i < allAudioSources.Length; i++)
+                {
+                    allAudioSources[i].pitch = 1;
+                }
+                m_character.GetComponent<Gyro>().enabled = true;
             }
         }
-        else
-        {
-            Time.timeScale = 1;
-            for (int i = 0; i < allAudioSources.Length; i++)
-            {
-                allAudioSources[i].pitch = 1;
-            }
-        }
+
+    }
+
+    public void onPauseButtonLongClicked(){
+        // Opposite of coming out of menu to game
+
+        // enable Canvas
+
+        // get the menu camera to the game camera
+
+        cameraAnimator.SetBool("GoToMenu", true);
+        starsAnimator.SetFloat("SpeedMultiplier", 1.0f);
+        // start the script for gyro and mouse inp
+        //m_characterCamera.GetComponent<control>().enabled = true;
+        //m_characterCamera.GetComponent<Gyro>().enabled = true;
+        m_character.GetComponent<Gyro>().enabled = false;
+
+        // spawn animals
+        m_animalSpawner.SetActive(false);
+
+		m_inGameCanvas.SetActive(false);
+		m_menuCanvas.SetActive(true);
     }
 
 	void Update()

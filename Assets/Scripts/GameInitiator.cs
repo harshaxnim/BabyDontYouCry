@@ -4,7 +4,10 @@ using UnityEngine;
 
 static class MyGameState
 {
+    public static bool in_menu = false;
     public static bool in_game = false;
+
+    public static bool camera_reset = false;
 }
 
 public class GameInitiator : MonoBehaviour {

@@ -8,12 +8,11 @@ public class Gyro : MonoBehaviour {
 
 	void Start() {
 		Input.gyro.enabled=true;
-        resetCam();
 	}
 
 	void Update() {
-		//if (Input.touchCount > 0) // temporary: will be removed
-			//resetCam ();
+        if (MyGameState.camera_reset) // temporary: will be removed
+			resetCam ();
 		transform.localRotation = Quaternion.Inverse(origin) * GyroToUnity(Input.gyro.attitude);
 	}
 
@@ -21,15 +20,20 @@ public class Gyro : MonoBehaviour {
 		return new Quaternion(q.x, q.y, -q.z, -q.w);
 	}
 
-	private void resetCam () {
+	public void resetCam () {
 		origin = GyroToUnity (Input.gyro.attitude);
 	}
 
 	void OnGUI() {
-		GUILayout.Label(origin.eulerAngles+" <- origin");
-		GUILayout.Label(Input.gyro.attitude.eulerAngles+" <- gyro");
-		GUILayout.Label(Quaternion.Inverse(Input.gyro.attitude).eulerAngles+" <- inv gyro");
-		GUILayout.Label(transform.localRotation.eulerAngles+" <- localRotation");
+		//GUILayout.Label(origin.eulerAngles+" <- origin");
+		//GUILayout.Label(Input.gyro.attitude.eulerAngles+" <- gyro");
+		//GUILayout.Label(Quaternion.Inverse(Input.gyro.attitude).eulerAngles+" <- inv gyro");
+        GUILayout.Label((transform.localRotation.eulerAngles).ToString());
+	}
+
+	private void OnEnable()
+	{
+        resetCam();
 	}
 
 }
