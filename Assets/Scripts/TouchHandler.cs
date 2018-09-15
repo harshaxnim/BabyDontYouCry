@@ -24,9 +24,7 @@ public class TouchHandler : MonoBehaviour {
     public StateMachineBehaviour m_stateMenu;
 
 
-    public float slowDownOnPause = 0.1f;
 
-    private bool paused = false;
 
 	// Use this for initialization
 	void Start () {
@@ -74,16 +72,16 @@ public class TouchHandler : MonoBehaviour {
 
             var allAudioSources = FindObjectsOfType<AudioSource>();
 
-            paused = !paused;
+            MyGameState.paused = !MyGameState.paused;
 
-            if (paused)
+            if (MyGameState.paused)
             {
                 // slow animations
-                Time.timeScale *= slowDownOnPause;
+                Time.timeScale *= MyGameState.slowDownOnPause;
                 // slow audio
                 for (int i = 0; i < allAudioSources.Length; i++)
                 {
-                    allAudioSources[i].pitch *= slowDownOnPause;
+                    allAudioSources[i].pitch *= MyGameState.slowDownOnPause;
                 }
                 // pause input
                 m_character.GetComponent<Gyro>().enabled = false;

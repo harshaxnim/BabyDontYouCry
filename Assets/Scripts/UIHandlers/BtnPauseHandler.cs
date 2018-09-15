@@ -39,6 +39,8 @@ public class BtnPauseHandler : MonoBehaviour
 	}
 
     private void LongClicked() {
+		if (MyGameState.paused)
+			gameManager.GetComponent<TouchHandler>().onPauseButtonClicked();
         gameManager.GetComponent<TouchHandler>().onPauseButtonLongClicked();
     }
 
@@ -55,8 +57,10 @@ public class BtnPauseHandler : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
         if (pause_down) {
-
+            
             pause_down_timer += Time.deltaTime;
+            if (MyGameState.paused)
+                pause_down_timer += Time.deltaTime/MyGameState.slowDownOnPause;
 
             AudioListener.volume = 1.0f - (pause_down_timer / pause_long_time);
 

@@ -8,6 +8,10 @@ static class MyGameState
     public static bool in_game = false;
 
     public static bool camera_reset = false;
+
+    public static bool paused = false;
+
+    public static float slowDownOnPause = 0.1f;
 }
 
 public class GameInitiator : MonoBehaviour {
